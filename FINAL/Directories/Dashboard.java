@@ -167,7 +167,7 @@ public class Dashboard {
         Screen.screenPause();
     } 
 
-    // Transfer funds to another account (stand by for code refactorization)
+    // Transfer funds to another account (depracated, unused)
     public static void transfer(Scanner scanner, User user) {
         Screen.clearScreen();
         Design.drawBox(33, 5, 50, 3, "Hi?Bank: Transfer Funds ", Design.GREEN_TEXT, Design.BLACK_BG);

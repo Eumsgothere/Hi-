@@ -102,7 +102,7 @@ public final class Screen {
 
             // Wait for 100 milliseconds to simulate loading progression
             try {
-                Thread.sleep(75); // Sleep for 75 milliseconds or the loading bar progresses every 0.075 seconds
+                Thread.sleep(32); // Sleep for 32 milliseconds or the loading bar progresses every 0.032 seconds
             } catch (InterruptedException e) {
                 System.out.println("Error during loading animation handled: " + e);
             }

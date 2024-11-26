@@ -99,36 +99,37 @@ public class Menu {
                 Design.BLACK_BG
             );
 
+            /* <deprecated>
             Design.drawBox(
                 33, 18, 50, 2, 
                 "[5] Transfer (DEPRACATED)", 
+                Design.GREEN_TEXT, 
+                Design.BLACK_BG
+            );*/
+
+            Design.drawBox(
+                33, 18, 50, 2, 
+                "[5] Currency Converter", 
                 Design.GREEN_TEXT, 
                 Design.BLACK_BG
             );
 
             Design.drawBox(
                 33, 20, 50, 2, 
-                "[6] Currency Converter", 
+                "[6] Transaction History", 
                 Design.GREEN_TEXT, 
                 Design.BLACK_BG
             );
 
             Design.drawBox(
                 33, 22, 50, 2, 
-                "[7] Transaction History", 
+                "[7] Log out", 
                 Design.GREEN_TEXT, 
                 Design.BLACK_BG
             );
 
             Design.drawBox(
                 33, 24, 50, 2, 
-                "[8] Log out", 
-                Design.GREEN_TEXT, 
-                Design.BLACK_BG
-            );
-
-            Design.drawBox(
-                33, 26, 50, 2, 
                 "Choice: ", 
                 Design.GREEN_TEXT,
                 Design.BLACK_BG
@@ -170,13 +171,13 @@ public class Menu {
                 case 4:
                     Dashboard.accountDetails(user);
                     break;
-                case 5:
+                /* case 5: <depracated>
                     Dashboard.transfer(scanner, user);
-                    break;
-                case 6:
+                    break; */
+                case 5:
                     Dashboard.currencyConverter(scanner);
                     break;
-                case 7:
+                case 6:
                     Screen.clearScreen();
                     Design.drawBox(
                         33, 5, 50, 4, 
@@ -208,7 +209,7 @@ public class Menu {
                     );
                     Screen.screenPause();
                     break;
-                case 8:
+                case 7:
                     currentUser = null;
                     System.out.println("Logged out successfully.");
                     return;
