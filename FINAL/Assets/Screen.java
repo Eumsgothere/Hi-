@@ -7,7 +7,7 @@ public final class Screen {
 
         // Clear screen => Windows CLI 
         try {
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // this forces the command prompt to clear the screen with process builder object and inheritIO() method to redirect the output to the console and start() method to start the process of clearing the screen
         } 
 
         // Will catch ANY exception that occurs when trying to clear the screen
@@ -16,11 +16,11 @@ public final class Screen {
         }
     }
 
-    public static void screenSleep(int time) {
-
+    // user defined method to sleep the screen with a specified amount of time through the parameter
+    public static void screenSleep(int time) { // whatever the value of the parameter will be passed through the time variable from the method call thread.sleep()
         // Sleep screen for a specified amount of time in the system
         try {
-            Thread.sleep(time);
+            Thread.sleep(time); // e.g. 1000 milliseconds = 1 second then it will pause the screen for 1 second
         } 
         
         // Will catch InterruptedException when trying to sleep the screen
@@ -32,9 +32,9 @@ public final class Screen {
     // Similar to C++'s system("pause") function but we implemented it in Java
     public static void screenPause() {
         @SuppressWarnings("resource")   // Suppresses or ignores the warning that scanner is never closed
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Press any key to go back...");
-        scanner.nextLine();
+        Scanner scanner = new Scanner(System.in); // Create a new scanner object to accept user input
+        System.out.print("Press any key to go back..."); // Print a message to the user to press any key to continue 
+        scanner.nextLine(); // Wait for the user to press any key to continue
         // scanner.close(); => this line is commented out because it will cause an error when the user tries to input a value
     }
 
@@ -50,21 +50,21 @@ public final class Screen {
         int CLI_WIDTH = 120; // Set the width of the CLI to 120 characters
         int CLI_HEIGHT = 24;  // Set the height of the CLI to 24 characters
 
-        String[] lines = text.split("\r\n"); // Split the text into lines
+        String[] lines = text.split("\r\n"); // Split the text into lines so we can center it vertically on the screen (split by the newline character)
 
-        int totalTextHeight = lines.length;
+        int totalTextHeight = lines.length; // Calculate the total height of the text (number of lines)
         int verticalPadding = (CLI_HEIGHT - totalTextHeight) / 2; // Calculate the vertical padding to center the text 24 - 6 (hibank height) = 18 lines of padding
 
         // Print vertical padding (empty lines before the text)
-        for (int i = 0; i < verticalPadding; i++) {
-            System.out.println();
+        for (int i = 0; i < verticalPadding; i++) { // Loop through the vertical padding
+            System.out.println(); // Print empty lines for padding
         }
 
         // Print the centered text
         for (String line : lines) {
-            int padding = (CLI_WIDTH - line.length()) / 2;
-            String centeredLine = " ".repeat(padding) + line + " ".repeat(padding);
-            System.out.println(centeredLine);
+            int padding = (CLI_WIDTH - line.length()) / 2; // Calculate the horizontal padding to center the text
+            String centeredLine = " ".repeat(padding) + line + " ".repeat(padding); // Add padding to the left and right of the text
+            System.out.println(centeredLine); // finally, print the centered text which is our hi?bank logo
         }
 
         // Loading bar below the title
@@ -73,10 +73,10 @@ public final class Screen {
         // int currentLength = 0;  => Initial length of the loading bar is 0
 
         // Print an initial empty loading bar to position it
-        String initialLoadingBar = " ".repeat(totalBarLength) + " 0%"; 
-        int loadingBarPadding = (CLI_WIDTH - initialLoadingBar.length()) / 2; 
-        String centeredInitialLoadingBar = " ".repeat(loadingBarPadding) + initialLoadingBar;
-        System.out.println(centeredInitialLoadingBar);
+        String initialLoadingBar = " ".repeat(totalBarLength) + " 0%"; // 40 spaces + 0% => 40 characters of padding on the left
+        int loadingBarPadding = (CLI_WIDTH - initialLoadingBar.length()) / 2; // 120 - 40 = 80 characters of padding on the left
+        String centeredInitialLoadingBar = " ".repeat(loadingBarPadding) + initialLoadingBar; // 80 characters of padding on the left + initial loading bar
+        System.out.println(centeredInitialLoadingBar); // Print the initial loading bar with padding
 
         /**
          * Simulation of the loop:
@@ -90,7 +90,7 @@ public final class Screen {
             int percentage = (int) ((double) i / totalBarLength * 100); // type casted to double to get the decimal value of the percentage 1 through 40 / 40 * 100 = 2.5% through 100%
 
             // format the loading bar and percentage text
-            String loadingBarWithPercentage = loadingBar + " " + percentage + "%";
+            String loadingBarWithPercentage = loadingBar + " " + percentage + "%"; // loading bar + percentage 
 
             // Calculate horizontal padding for centering the loading bar with percentage
             loadingBarPadding = (CLI_WIDTH - loadingBarWithPercentage.length()) / 2; // 120 - 43 = 77 characters of padding on the left
@@ -107,9 +107,9 @@ public final class Screen {
                 System.out.println("Error during loading animation handled: " + e);
             }
         }
-
         privateWelcome();
     }
+
     private static void privateWelcome() {
         final String text = "Hi?Bank: A Virtual Banking Solutions Developed with Object-Oriented Principles";
         final int CLI_WIDTH = 120;  
@@ -121,7 +121,10 @@ public final class Screen {
 
         // print the text after loading progresses
         System.out.println(centeredSubtitle);
+    
+        @SuppressWarnings("unused") // Suppresses or ignores the warning that choice is never used, no bother
         String choice; 
+        @SuppressWarnings("resource") // Suppresses or ignores the warning that scanner is never closed, no bother
         Scanner scanner = new Scanner(System.in);
 
         // empty input to continue

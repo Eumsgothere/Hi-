@@ -7,6 +7,14 @@ import FINAL.Assets.Screen;
 import FINAL.Database.Authentication;
 import FINAL.Database.User;
 
+// final int x => the x-coordinate of the box
+// final int y => the y-coordinate of the box
+// final int width => the width of the box
+// final int height => the height of the box
+// final String content => the content of the box
+// final String textColor => the text color of the box
+// final String bgColor => the background color of the box
+
 public class Menu {
     // private static List<User> users = User.loadUser();
     private static User currentUser;

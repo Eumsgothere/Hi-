@@ -8,6 +8,7 @@ public abstract class Color {
     public static final String GREEN_TEXT = "\033[32m";
     public static final String YELLOW_TEXT = "\033[33m";
     public static final String BLUE_TEXT = "\033[34m";
+    public static final String ORANGE_TEXT = "\u001B[33m";
     public static final String MAGENTA_TEXT = "\033[35m";
     public static final String CYAN_TEXT = "\033[36m";
     public static final String WHITE_TEXT = "\033[37m";

@@ -6,8 +6,17 @@ import FINAL.Assets.Design;
 import FINAL.Assets.Screen;
 import FINAL.Database.User;
 
+// final int x => the x-coordinate of the box
+// final int y => the y-coordinate of the box
+// final int width => the width of the box
+// final int height => the height of the box
+// final String content => the content of the box
+// final String textColor => the text color of the box
+// final String bgColor => the background color of the box
+
+// Dashboard class => This class contains the methods for the dashboard functionalities such as deposit, withdraw, account details, transfer, and currency converter.
 public class Dashboard {
-    private static List<User> users = User.loadUser();
+    private static List<User> users = User.loadUser(); // load the user data from the file into the users list array, impelementation is in the User class @line 64 col 40
     // private static User currentUser;
 
     // deposit funds to the current account
@@ -223,10 +232,12 @@ public class Dashboard {
         return null; // Return null if no match is found
     }
     
-
+    // this method is used to convert currency based on the user's choice and is using java collection's hash map to store the currency rates in pair values.
     public static void currencyConverter(Scanner hiScanner) {
+        // we mapped <string, double> to store the currency rates with a pair of string and double values as we can see from the .put method
         Map<String, Double> currencyRates = new HashMap<>();
 
+        // currency rates are based on the current rates as of November 2024 (for the sake of demonstration)
         currencyRates.put("PHP to USD", 0.017);
         currencyRates.put("USD to PHP", 59.03);
         currencyRates.put("USD to EURO", 0.95);
@@ -234,7 +245,6 @@ public class Dashboard {
         currencyRates.put("YEN to PHP", 0.38);
         currencyRates.put("PHP to YEN", 2.61);
         
-
         Screen.clearScreen();
         Design.drawBox(
             33, 5, 50, 4, 
@@ -306,6 +316,7 @@ public class Dashboard {
         double convertedAmount = 0;
 
         switch (choice) {
+            // provided six options for currency conversion (for the sake of demonstration)
             case 1:
                 convertedAmount = amount * currencyRates.get("PHP to USD");
                 break;
