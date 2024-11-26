@@ -8,7 +8,7 @@ import FINAL.Database.Authentication;
 import FINAL.Database.User;
 
 public class Menu {
-    private static List<User> users = User.loadUser();
+    // private static List<User> users = User.loadUser();
     private static User currentUser;
 
     public static void startProgram() {
@@ -18,6 +18,7 @@ public class Menu {
         Screen.clearScreen();
         Welcome.welcomeMenu();
         
+        // control structure for the main menu
         while (true) {
             Screen.clearScreen();
             Welcome.welcomeMenu();
@@ -45,31 +46,112 @@ public class Menu {
             }
         }
     }
-
+    /**
+     * Main menu for the application
+     * @param scanner => accepts user input through parameters
+     * @param user => accepts the user object
+     */
     public static void mainMenu(Scanner scanner, User user) {
         int choice;
 
         while (true) {
             Screen.clearScreen();
-            Design.drawBox(33, 7, 50, 3, "Welcome to Hi?Bank, " + currentUser.getUsername() + "!", Design.GREEN_TEXT, Design.BLACK_BG);
+
+            Design.drawBox(
+                33, 5, 50, 4, 
+                "Welcome to Hi?Bank, " + currentUser.getUsername() + "!", 
+                Design.GREEN_TEXT, 
+                Design.BLACK_BG
+            );
             
-            Design.drawBox(33, 10, 50, 2, "[1] Balance", Design.GREEN_TEXT, Design.BLACK_BG);
-            Design.drawBox(33, 12, 50, 2, "[2] Deposit", Design.GREEN_TEXT, Design.BLACK_BG);
-            Design.drawBox(33, 14, 50, 2, "[3] Withdraw", Design.GREEN_TEXT, Design.BLACK_BG);
-            Design.drawBox(33, 16, 50, 2, "[4] Account Details", Design.GREEN_TEXT, Design.BLACK_BG);
-            Design.drawBox(33, 18, 50, 2, "[5] Transfer", Design.GREEN_TEXT, Design.BLACK_BG);
-            Design.drawBox(33, 20, 50, 2, "[6] Currency Converter", Design.GREEN_TEXT, Design.BLACK_BG);
-            Design.drawBox(33, 22, 50, 2, "[7] Transaction History", Design.GREEN_TEXT, Design.BLACK_BG);
-            Design.drawBox(33, 24, 50, 2, "[8] Log out", Design.GREEN_TEXT, Design.BLACK_BG);
-            Design.drawBox(33, 26, 50, 2, "Choice: ", Design.GREEN_TEXT, Design.BLACK_BG);
+            Design.drawBox(
+                33, 10, 50, 2, 
+                "[1] Balance", 
+                Design.GREEN_TEXT, Design.BLACK_BG
+            );
+
+            Design.drawBox(
+                33, 12, 50, 2, 
+                "[2] Deposit", 
+                Design.GREEN_TEXT, 
+                Design.BLACK_BG
+            );
+
+            Design.drawBox(
+                33, 14, 50, 2, 
+                "[3] Withdraw", 
+                Design.GREEN_TEXT, 
+                Design.BLACK_BG
+            );
+
+            Design.drawBox(
+                33, 16, 50, 2, 
+                "[4] Account Details", 
+                Design.GREEN_TEXT, 
+                Design.BLACK_BG
+            );
+
+            Design.drawBox(
+                33, 18, 50, 2, 
+                "[5] Transfer (DEPRACATED)", 
+                Design.GREEN_TEXT, 
+                Design.BLACK_BG
+            );
+
+            Design.drawBox(
+                33, 20, 50, 2, 
+                "[6] Currency Converter", 
+                Design.GREEN_TEXT, 
+                Design.BLACK_BG
+            );
+
+            Design.drawBox(
+                33, 22, 50, 2, 
+                "[7] Transaction History", 
+                Design.GREEN_TEXT, 
+                Design.BLACK_BG
+            );
+
+            Design.drawBox(
+                33, 24, 50, 2, 
+                "[8] Log out", 
+                Design.GREEN_TEXT, 
+                Design.BLACK_BG
+            );
+
+            Design.drawBox(
+                33, 26, 50, 2, 
+                "Choice: ", 
+                Design.GREEN_TEXT,
+                Design.BLACK_BG
+            );
 
             choice = scanner.nextInt();
-            Design.drawBox(33, 26, 50, 2, scanner.nextLine(), Design.GREEN_TEXT, Design.BLACK_BG);
-
 
             switch (choice) {
                 case 1:
-                    System.out.println("Balance: " + currentUser.getBalance());
+                    Screen.clearScreen();
+                    Design.drawBox(
+                        33, 5, 50, 4, 
+                        "ACCOUNT BALANCE", 
+                        Design.GREEN_TEXT, 
+                        Design.BLACK_BG
+                    );
+
+                    Design.drawBox(
+                        33, 10, 50, 2, 
+                        "Your balance is: " + user.getBalance(), 
+                        Design.GREEN_TEXT, 
+                        Design.BLACK_BG
+                    );
+
+                    Design.drawBox(
+                        33, 13, 0, 0, 
+                        "", 
+                        Design.GREEN_TEXT, 
+                        Design.BLACK_BG
+                    );
+                    Screen.screenPause();
                     break;
                 case 2:
                     Dashboard.deposit(scanner, user);
@@ -87,14 +169,43 @@ public class Menu {
                     Dashboard.currencyConverter(scanner);
                     break;
                 case 7:
-                    System.out.println("Transaction History: \n" + currentUser.getTransactionHistory());
+                    Screen.clearScreen();
+                    Design.drawBox(
+                        33, 5, 50, 4, 
+                        "Transaction History:", 
+                        Design.GREEN_TEXT, 
+                        Design.BLACK_BG
+                    );
+
+                    int yPosition = 10;
+
+                    List<String> transactions = user.getTransactionHistoryList();
+
+                    for (String transaction : transactions) {
+                        Design.drawBox(
+                            33, yPosition, 50, 2, 
+                            transaction, 
+                            Design.GREEN_TEXT, 
+                            Design.BLACK_BG
+                        );
+                        yPosition += 2;
+                    }
+
+                    yPosition += 1;
+                    Design.drawBox(
+                        33, yPosition, 0, 0, 
+                        "", 
+                        Design.GREEN_TEXT, 
+                        Design.BLACK_BG
+                    );
+                    Screen.screenPause();
                     break;
                 case 8:
                     currentUser = null;
                     System.out.println("Logged out successfully.");
                     return;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println("Invalid choice.");
             }
         }
     }

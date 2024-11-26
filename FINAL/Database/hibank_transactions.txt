@@ -1,2 +1,9 @@
-2024-0001,Deposited 10000.0
-2024-0019,Deposited: 10001.0
+2024-0001,Deposited: 1000.0
+2024-0001,Deposited: 1000.0
+2024-0001,Deposited: 10000.0
+2024-0001,Withdrawn: 9500.0
+2024-0001,Deposited: 1000.0
+2024-0001,Deposited: 1000.0
+2024-0003,Deposited: 1000.0
+2024-0003,Withdrawn: 500.0
+2024-0001,Deposited: 1000.0

@@ -1,18 +1,11 @@
 package FINAL.Database;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.List;
-
+import java.io.*;
+import java.util.*;
 import FINAL.Directories.Transactionable;
 
-import java.util.ArrayList;
-
-// User Class => a subclass of Account and implements Transactionable interface for adding transactions and getting transaction history
 public class User extends Account implements Transactionable {
-    private String transactionHistory; // Transaction history as a string for saving transaction in the file and this is privately unique for each user
+    private String transactionHistory;
 
     public User(String username, String password, String id, double balance, String transactionHistory) {
         super(username, password, id, balance);
@@ -35,37 +28,50 @@ public class User extends Account implements Transactionable {
         return balance;
     }
 
-    @Override // Overriding the addTransaction method from the Transactionable interface
+    @Override
     public String getTransactionHistory() {
         return transactionHistory;
     }
 
-    @Override // Overriding the saveUser method from the Account class
+    public List<String> getTransactionHistoryList() {
+        return Arrays.asList(transactionHistory.split("\n"));
+    }
+
+    @Override
     public void saveUser() {
-        // Save the user data in the file database with the account ID, username, password, and balance separated by comma when the program is exiting
         String filePath = "FINAL\\Database\\hibank_user.txt";
-        try (FileWriter hibank_writeUser = new FileWriter(filePath, true)) {
-            hibank_writeUser.write(accountId + "," + username + "," + password + "," + balance + "\n");
+        List<User> users = loadUser();
+        boolean userExists = false;
+    
+        try (FileWriter hibank_writeUser = new FileWriter(filePath)) {
+            for (User user : users) {
+                if (user.getAccountId().equals(this.accountId)) {
+                    hibank_writeUser.write(this.accountId + "," + this.username + "," + this.password + "," + this.balance + "\n");
+                    userExists = true;
+                } else {
+                    hibank_writeUser.write(user.getAccountId() + "," + user.getUsername() + "," + user.getPassword() + "," + user.getBalance() + "\n");
+                }
+            }
+            if (!userExists) {
+                hibank_writeUser.write(this.accountId + "," + this.username + "," + this.password + "," + this.balance + "\n");
+            }
         } catch (IOException hibank_e) {
             System.out.println("Error saving user data: " + hibank_e);
         }
     }
 
-    // Using Java Collections, we can load the user data from the file database and return a list of users when the program starts up
     public static List<User> loadUser() {
         List<User> users = new ArrayList<>();
-
         String filePath = "FINAL\\Database\\hibank_user.txt";
         try (BufferedReader userReader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = userReader.readLine()) != null) {
-                String[] user_data = line.split(","); // Split the line by comma to get the user data
-                String username = user_data[1]; // Get the username from the user data
-                String password = user_data[2]; // Get the password from the user data 
-                String accId = user_data[0]; // Get the account ID from the user data
-                double balance = Double.parseDouble(user_data[3]);  // Get the balance from the user data
-                String transactionHistory = loadTransaction(accId); // Load the transaction history for the user
-
+                String[] user_data = line.split(",");
+                String username = user_data[1];
+                String password = user_data[2];
+                String accId = user_data[0];
+                double balance = Double.parseDouble(user_data[3]);
+                String transactionHistory = loadTransaction(accId);
                 users.add(new User(username, password, accId, balance, transactionHistory));
             }
         } catch (IOException e) {
@@ -76,7 +82,6 @@ public class User extends Account implements Transactionable {
 
     private static String loadTransaction(String accountId) {
         StringBuilder transactionHistory = new StringBuilder();
-
         String filePath = "FINAL\\Database\\hibank_transactions.txt";
         try (BufferedReader transactionReader = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -101,5 +106,19 @@ public class User extends Account implements Transactionable {
         } catch (IOException hibank_e) {
             System.out.println("Error saving transaction: " + hibank_e);
         }
+    }
+
+    public void deposit(double amount) {
+        this.balance += amount;
+        saveUser();
+    }
+   
+    public boolean withdraw(double amount) {
+        if (this.balance >= amount) {
+            this.balance -= amount;
+            saveUser();
+            return true;
+        }
+        return false;
     }
 }

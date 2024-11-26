@@ -8,6 +8,19 @@ public abstract class Account {
     protected String accountId;
     protected double balance;
 
+    // Account Constructor (Default) => This constructor initializes the Account class. (unused)
+    public Account() {
+
+    }
+
+    /**
+     * Account Constructor => This constructor initializes the username, password, accountId, and balance of the Account class.
+     * @param username => The username of the account.
+     * @param password => The password of the account.
+     * @param id => The accountId of the account.
+     * @param balance => The balance of the account.
+     */
+
     public Account(String username, String password, String id, double balance) {
         this.username = username;
         this.password = password;
@@ -15,6 +28,8 @@ public abstract class Account {
         this.balance = balance;
     }
 
+    // Getters => These methods return the username, password, accountId, and balance of the account.
+    // These concepts are covered with the use of encapsulation.
     public String getUsername() {
         return username;
     }
@@ -31,6 +46,7 @@ public abstract class Account {
         return balance;
     }
 
+    // Methods => These methods deposit and withdraw money from the account.
     public void deposit(double amount) {
         balance += amount;
     }
@@ -43,5 +59,6 @@ public abstract class Account {
         return false;
     }
 
+    // Abstract Method => This abstract method saves the user data and it is forced to implement on the User subclass.
     public abstract void saveUser();
 }
