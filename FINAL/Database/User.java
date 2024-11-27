@@ -52,7 +52,7 @@ public class User extends Account implements Transactionable {
     public List<String> getTransactionHistoryList() {
         return Arrays.asList(transactionHistory.split("\n")); // registry expression to split the transaction history by line
     }
-
+    
     // saveUser => This method saves the user data to the hibank_user.txt file so that we can load it back when we re-open the system and able to input saved data.
     public void saveUser() {
         String filePath = "FINAL\\Database\\hibank_user.txt";
@@ -130,6 +130,7 @@ public class User extends Account implements Transactionable {
         }
     }
 
+    // runtime polymorphism => overriding the deposit and withdraw methods from the superclass Account
     // deposit => This method deposits money to the account and saves the user data.
     public void deposit(double amount) {
         this.balance += amount;
