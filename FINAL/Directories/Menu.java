@@ -40,13 +40,12 @@ public class Menu {
                     Authentication.registerUser(scanner);
                     break;
                 case 2:
-                Screen.clearScreen();
+                    Screen.clearScreen();
                     Authentication.loginUser(scanner);
                     break;
                 case 3:
-                Screen.clearScreen(); 
-                    System.out.println("Thank you for using Hi?Bank: Where Banking Meets Innovation!");
-                    System.exit(0);
+                    Screen.clearScreen(); 
+                    Screen.appExit();
                     break;
                 default:
                     System.out.println("ERROR");

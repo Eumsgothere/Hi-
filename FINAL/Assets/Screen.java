@@ -132,4 +132,71 @@ public final class Screen {
         System.out.print("");
         choice = scanner.nextLine();
     }
+
+    // basically the exit screen of the application and the credits of the developers of the application
+    // this will progress reversed form the loading animation
+    public static void appExit() {
+        String title = "██╗  ██╗██╗██████╗ ██████╗  █████╗ ███╗   ██╗██╗  ██╗\r\n" + 
+                   "██║  ██║██║╚════██╗██╔══██╗██╔══██╗████╗  ██║██║ ██╔╝\r\n" + 
+                   "███████║██║  ▄███╔╝██████╔╝███████║██╔██╗ ██║█████╔╝ \r\n" + 
+                   "██╔══██║██║  ▀▀══╝ ██╔══██╗██╔══██║██║╚██╗██║██╔═██╗ \r\n" + 
+                   "██║  ██║██║  ██╗   ██████╔╝██║  ██║██║ ╚████║██║  ██╗\r\n" + 
+                   "╚═╝  ╚═╝╚═╝  ╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝";
+
+        int CLI_WIDTH = 120;
+        int CLI_HEIGHT = 24;
+
+        String[] lines = title.split("\r\n");
+        int totalTextHeight = lines.length;
+        int verticalPadding = (CLI_HEIGHT - totalTextHeight) / 2;
+
+        for (int i = 0; i < verticalPadding; i++) {
+            System.out.println();
+        }
+
+        for (String line : lines) {
+            int padding = (CLI_WIDTH - line.length()) / 2;
+            System.out.println(" ".repeat(padding) + line);
+        }
+
+        hi();
+    }
+    
+    private static void hi() {
+        final int CLI_WIDTH = 128; // added 8 for extra padding (centering text)
+
+        String thanksMessage = "Thank you for using " + Color.GRAY_TEXT + "A Virtual Banking Solutions Developed with Object-Oriented Principles" + Color.RESET;
+        String exitingMessage = Color.ORANGE_TEXT + "Hi? " + Color.GRAY_TEXT + "is now exiting..." + Color.RED_TEXT + " Goodbye!" + Color.RESET;
+
+        String[] groupMembers = {
+            Color.YELLOW_TEXT + "Capapas, Naomie Feona G." + Color.RESET,
+            Color.PURPLE_TEXT + "Cunanan, Louise Veronica L." + Color.RESET,
+            Color.MAGENTA_TEXT + "Giron, Petercen Nikolai R." + Color.RESET,
+            Color.CYAN_TEXT + "Montesa, Elaine Bernadette" + Color.RESET
+        };
+
+        int padding = (CLI_WIDTH - thanksMessage.length()) / 2;
+        System.out.println(" ".repeat(padding) + thanksMessage);
+        System.out.println();
+
+        for (String member : groupMembers) {
+            padding = (CLI_WIDTH - member.length()) / 2;
+            System.out.println(" ".repeat(padding) + member);
+        }
+
+        System.out.println();
+        padding = (CLI_WIDTH - exitingMessage.length()) / 2 + 5; // + 5 for extra padding (centering)
+        System.out.println(" ".repeat(padding) + exitingMessage);
+
+        @SuppressWarnings("unused") // Suppresses or ignores the warning that choice is never used, no bother
+        String choice; 
+        @SuppressWarnings("resource") // Suppresses or ignores the warning that scanner is never closed, no bother
+        Scanner scanner = new Scanner(System.in);
+
+        // empty input to continue
+
+        System.out.print("");
+        choice = scanner.nextLine();
+        System.exit(-1);
+    }
 }

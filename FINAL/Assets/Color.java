@@ -2,14 +2,22 @@ package FINAL.Assets;
 
 // Superclass for Design subclass => contains the color codes for the CLI or Command Prompt
 public abstract class Color {
+    // ANSI color codes for the CLI or Command Prompt => used to change the color of the text or background
+
+    /**
+     * the following ansi color codes are as defined:
+     */
+
     public static final String RESET = "\033[0m"; // Reset all colors
     public static final String BLACK_TEXT = "\033[30m";
     public static final String RED_TEXT = "\033[31m";
+    public static final String GRAY_TEXT = "\033[90m";
     public static final String GREEN_TEXT = "\033[32m";
     public static final String YELLOW_TEXT = "\033[33m";
     public static final String BLUE_TEXT = "\033[34m";
     public static final String ORANGE_TEXT = "\u001B[33m";
-    public static final String MAGENTA_TEXT = "\033[35m";
+    public static final String PURPLE_TEXT = "\033[35m";
+    public static final String MAGENTA_TEXT = "\033[95m";
     public static final String CYAN_TEXT = "\033[36m";
     public static final String WHITE_TEXT = "\033[37m";
     public static final String BLACK_BG = "\033[40m";
